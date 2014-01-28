@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TweetsAdapter extends ArrayAdapter<Tweet> {
 
@@ -38,7 +37,6 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
 		nameView.setText(Html.fromHtml(formattedName));
 		TextView bodyView = (TextView) view.findViewById(R.id.tvBody);
 		bodyView.setText(Html.fromHtml(tweet.getBody()));
-		Toast.makeText(getContext(), tweet.getUser().getName(), Toast.LENGTH_SHORT).show();
 		return view;
 	}
 }

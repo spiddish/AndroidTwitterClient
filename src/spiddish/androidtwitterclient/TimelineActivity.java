@@ -31,45 +31,14 @@ public class TimelineActivity extends Activity {
 		setContentView(R.layout.activity_timeline);
 		TwitterApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler() {
 			@Override
-			public void onSuccess(JSONArray jsonTweet) {
+			public void onSuccess(int id, JSONArray jsonTweet) {
 				Log.d("D", "onSuccess() getHomeTimeline");
 				ArrayList<Tweet> tweets = Tweet.fromJson(jsonTweet);
 				ListView lvTweets = (ListView) findViewById(R.id.lvTweets);
-				adapter = new TweetsAdapter(getBaseContext(), R.id.lvTweets, tweets);
+				adapter = new TweetsAdapter(getBaseContext(), id, tweets);
 				lvTweets.setAdapter(adapter);
 				Log.d("D", jsonTweet.toString());
-			}
-
-			@Override
-			protected void handleFailureMessage(Throwable arg0, String arg1) {
-				Log.d("D", "fail exception");
-			}
-
-			@Override
-			public void onFailure(Throwable arg0, JSONArray arg1) {
-				Log.d("D", "fail1");
-			}
-
-			@Override
-			public void onFailure(Throwable arg0, JSONObject arg1) {
-				Log.d("D", "fail2");
-			}
-
-			@Override
-			public void onSuccess(int arg0, JSONArray arg1) {
-				Log.d("D", "success1");
-			}
-
-			@Override
-			public void onSuccess(int arg0, JSONObject arg1) {
-				Log.d("D", "success2");
-			}
-
-			@Override
-			public void onSuccess(JSONObject arg0) {
-				Log.d("D", "success3");
-			}
-			
+			}			
 		});
 		TwitterApp.getRestClient().getUserInfo(new JsonHttpResponseHandler() {
 			@Override
@@ -112,8 +81,8 @@ public class TimelineActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 			String tweet = data.getStringExtra("tweet");
-			//if (!tweet.equals(""))
-				//adapter.insert(new Tweet(tweet, appUser), 0);
+			if (!tweet.equals(""))
+				adapter.insert(new Tweet(tweet, appUser), 0);
 			Toast.makeText(this, "activity returned: " + tweet, Toast.LENGTH_SHORT).show();
 		} 
 	}
