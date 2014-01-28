@@ -30,44 +30,33 @@
         android:onClick="onCancelTweet"
         android:text="Cancel" />
 
-    <LinearLayout
-        android:id="@+id/llCompose"
+    <TextView
+        android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/ivProfile"
+        android:layout_toRightOf="@+id/btnCancelTweet"/>
+
+    <EditText
+        android:id="@+id/etTweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnCancelTweet"
+        android:layout_alignRight="@+id/btnPostTweet"
+        android:layout_below="@+id/ivProfile"
+        android:layout_marginTop="20dp"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnCancelTweet"
         android:layout_below="@+id/btnCancelTweet"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical" >
-
-        <LinearLayout
-            android:id="@+id/llUserInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/ivProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp" />
-
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <EditText
-        	android:id="@+id/etTweet"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"
-        	android:inputType="textMultiLine" >
-			<requestFocus />
-		</EditText>
-    </LinearLayout>
-
-    
+        android:layout_marginTop="20dp"
+        android:contentDescription="profile photo" />
 
 </RelativeLayout>

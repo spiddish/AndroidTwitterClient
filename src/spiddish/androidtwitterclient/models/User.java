@@ -49,7 +49,7 @@ public class User implements Serializable {
         	u.name = json.getString("name");
         	u.uid = json.getLong("id");
         	u.screenName = json.getString("screen_name");
-        	u.profileBgImageUrl = json.getString("profile_background_image_url");
+        	u.profileBgImageUrl = json.getString("profile_image_url");
         	u.numTweets = json.getInt("statuses_count");
         	u.followersCount = json.getInt("followers_count");
         	u.friendsCount = json.getInt("friends_count");
