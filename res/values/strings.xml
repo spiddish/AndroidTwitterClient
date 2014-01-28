@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Michael\'s Twitter</string>
+    <string name="action_compose">Compose</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_photos">Flickr Photos</string>
+    <string name="login_label">Log in</string>
+    <string name="title_activity_timeline">Michael\'s Timeline</string>
+    <string name="title_activity_compose">Compose Tweet</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
