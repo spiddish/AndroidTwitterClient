@@ -20,4 +20,8 @@ public class HomeTimeLineFragment extends TweetsListFragment {
 			}			
 		});
 	}
+	
+	public void addTweet(Tweet tweet) {
+		this.getAdapter().insert(tweet, 0);
+	}
 }

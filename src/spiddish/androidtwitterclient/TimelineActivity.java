@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import spiddish.androidtwitterclient.fragments.HomeTimeLineFragment;
 import spiddish.androidtwitterclient.fragments.MentionsFragment;
+import spiddish.androidtwitterclient.models.Tweet;
 import spiddish.androidtwitterclient.models.User;
 
 import com.codepath.apps.restclienttemplate.R;
@@ -15,6 +16,7 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -93,8 +95,13 @@ public class TimelineActivity extends FragmentActivity implements TabListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
 			String tweet = data.getStringExtra("tweet");
-			//if (!tweet.equals(""))
-				//fragmentTweets.getAdapter().insert(new Tweet(tweet, appUser), 0);
+			if (!tweet.equals("")) {
+				Tweet newTweet = new Tweet(tweet, appUser);
+				FragmentManager manager = getSupportFragmentManager();
+				Fragment frag = manager.findFragmentById(R.id.frameContainer);
+				if (frag instanceof HomeTimeLineFragment)
+					((HomeTimeLineFragment) frag).addTweet(newTweet);
+			}
 			Toast.makeText(this, "activity returned: " + tweet, Toast.LENGTH_SHORT).show();
 		} 
 	}
