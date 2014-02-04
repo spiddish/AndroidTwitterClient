@@ -40,13 +40,42 @@ public class TwitterClient extends OAuthBaseClient {
         client.get(apiUrl, params, handler);
         Log.d("D", "getHomeTimeline(): " + apiUrl);
     }
+ 
+    public void getUserTimeline(String screenName, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", "25");
+        if (screenName != null)
+        	params.put("screen_name", screenName);
+        client.get(apiUrl, params, handler);
+        Log.d("D", "getUserTimeline(): " + apiUrl);
+    }
     
-    public void getUserInfo(AsyncHttpResponseHandler handler) {
+    public void getMentions(AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", "25");
+        client.get(apiUrl, params, handler);
+        Log.d("D", "getMentions(): " + apiUrl);
+    }
+    
+    public void getMyInfo(String screenName, AsyncHttpResponseHandler handler) {
+    	if (screenName == null) {
+    		Log.d("D", "screenName null, calling getUserInfo");
+    		getUserInfo(handler);
+    		return;
+    	}
         String apiUrl = getApiUrl("users/show.json");
         RequestParams params = new RequestParams();
-        params.put("screen_name", "spiddish"); // find a way of figuring out the user
+        params.put("screen_name", screenName); // find a way of figuring out the user
         params.put("include_entities", "false");
         client.get(apiUrl, params, handler);
+        Log.d("D", "getMyInfo(): " + apiUrl);
+    }
+    
+    public void getUserInfo(AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("account/verify_credentials.json");
+        client.get(apiUrl, null, handler);
         Log.d("D", "getUserInfo(): " + apiUrl);
     }
     
