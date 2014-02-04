@@ -14,12 +14,21 @@ public class UserTimeLineFragment extends TweetsListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		TwitterApp.getRestClient().getUserTimeline(null, new JsonHttpResponseHandler() {
+		String screenName = getArguments().getString("screen_name"); 
+		TwitterApp.getRestClient().getUserTimeline(screenName, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(int id, JSONArray jsonTweet) {
 				ArrayList<Tweet> tweets = Tweet.fromJson(jsonTweet);
 				getAdapter().addAll(tweets);
 			}			
 		});
+	}
+
+	public static UserTimeLineFragment newInstance(String screenName) {
+		UserTimeLineFragment frag = new UserTimeLineFragment();
+        Bundle args = new Bundle();
+        args.putString("screen_name", screenName);
+        frag.setArguments(args);
+        return frag;
 	}
 }

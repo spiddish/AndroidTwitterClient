@@ -2,6 +2,7 @@ package spiddish.androidtwitterclient;
 
 import org.json.JSONObject;
 
+import spiddish.androidtwitterclient.fragments.UserTimeLineFragment;
 import spiddish.androidtwitterclient.models.User;
 
 import com.codepath.apps.restclienttemplate.R;
@@ -10,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
@@ -26,6 +28,13 @@ public class ProfileActivity extends FragmentActivity {
 		if (bundle != null)
 			screenName = bundle.getString("screen_name");
 		loadProfileInfo(screenName);
+		loadUserTweets(screenName);
+	}
+
+	private void loadUserTweets(String screenName) {
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.frameProfileContainer, UserTimeLineFragment.newInstance(screenName));
+		ft.commit();
 	}
 
 	private void loadProfileInfo(String screenName) {
